@@ -17,11 +17,16 @@
 ### Parameter Descriptions:
 
 lam0: Wavelength of beam
+
 s0 and sF: Initial and final beam spot size
+
 r0 and rF: Initial and final radius of curvature
 
+
 d0: Distance between start and lens1
+
 d1: Distance between lens1 and lens2
+
 d2: Distance between lens2 and end
 
 dtotmax: Desired max total distance
