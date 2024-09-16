@@ -1,7 +1,6 @@
 # Mode-Matcher
 
-
-Repository Contents:
+### Contents
   Lens_Solve.py:
     Contains functions required to do mode matching
   
@@ -9,9 +8,9 @@ Repository Contents:
     Opens user interface for Lens_Solve.py
   
 
-Requirements:
+### Requirements:
   "pip install streamlit"
 
-How to run UI:
+### How to run UI:
   "streamlit run ModeMatcher.py"
 
