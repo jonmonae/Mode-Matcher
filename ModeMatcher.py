@@ -32,7 +32,7 @@ if 'max_dtot' not in st.session_state:
 
 st.header("Enter Available Lenses")
 # Lens array input (keeping it as is)
-lens_str = st.text_input("Enter lens focal length in meters:")
+lens_str = st.text_input("Enter lens focal lengths:")
 col = st.columns(3)
 
 with col[0]:
@@ -70,26 +70,26 @@ with col[2]:
 st.header("Enter Parameters")
 col = st.columns(3)
 with col[0]:
-    s0_str = st.text_input("Enter initial spot size in meters: ")
+    s0_str = st.text_input("Enter s0: ")
 with col[1]:
-    r0_str = st.text_input("Enter initial radius of curvature: ")
+    r0_str = st.text_input("Enter r0: ")
 with col[2]:
-    lam0_str = st.text_input("Enter beam wavelength in meters: ")
+    lam0_str = st.text_input("Enter lam0: ")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    sF_str = st.text_input("Enter desired spot size: ")
-    d0min_str = st.text_input("Enter minimum d0 distance: ")
-    d1min_str = st.text_input("Enter minimum d1 distance: ")
-    d2min_str = st.text_input("Enter minimum d2 distance: ")
+    sF_str = st.text_input("Enter desired sF: ")
+    d0min_str = st.text_input("Enter minimum d0 ")
+    d1min_str = st.text_input("Enter minimum d1: ")
+    d2min_str = st.text_input("Enter minimum d2: ")
 
 with col2:
-    rF_str = st.text_input("Enter desired radius of curvature: ")
-    d0max_str = st.text_input("Enter maximum d0 distance: ")
-    d1max_str = st.text_input("Enter maximum d1 distance: ")
-    d2max_str = st.text_input("Enter maximum d2 distance: ")
-max_dtot_str = st.text_input("Enter maximum total distance (dtot): ")
+    rF_str = st.text_input("Enter desired rF: ")
+    d0max_str = st.text_input("Enter maximum d0: ")
+    d1max_str = st.text_input("Enter maximum d1: ")
+    d2max_str = st.text_input("Enter maximum d2: ")
+max_dtot_str = st.text_input("Enter maximum dtot: ")
 
 
 # Save All button
