@@ -39,7 +39,9 @@ All inputs in meters. Can input using python scientific e.g. 3e-5
 
 
 r0, rf default to 10**10m (collimated beam)
+
 d0/d1/d2 min/max default to 0
+
 dtotmax default to 0
 
 
