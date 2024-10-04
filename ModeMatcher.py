@@ -29,6 +29,7 @@ if 'd2max' not in st.session_state:
 if 'max_dtot' not in st.session_state:
     st.session_state.max_dtot = None
 
+st.image('diagram.jpg', caption="Diagram")
 
 st.header("Enter Available Lenses")
 # Lens array input (keeping it as is)
