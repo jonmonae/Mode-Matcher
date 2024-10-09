@@ -2,6 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 import pandas as pd
+import streamlit as st
+
+def format_float(value, threshold=3):
+    if abs(value) < 10**(-threshold):
+        # Print in scientific notation if smaller than threshold
+        return f"{value:.3e}"  # or however many decimals you want
+    else:
+        # Print in regular float format
+        return f"{value:.4f}" 
 
 
 def z_0(w0, lam0, n=1):
@@ -340,6 +349,8 @@ def plot_single(d0, lens, d1, s0, lam0, r0=10**10):
    plt.ylim(-max_spot*1.1,max_spot*1.1)
    plt.xlim(0, (ztot-z0)*1.05)
 
+   return plt
+
 
 
 
@@ -392,6 +403,8 @@ def plot_dual(d0, lens1, d1, lens2, d2, s0, lam0, r0=10**10):
 
    plt.ylim(-1.1*max_spot,1.1*max_spot)
    plt.xlim(0, (ztot-z0)*1.05)
+
+   return plt
 
 
 def lens_solve(sF, lenses, s0, lam0, r0 = 10**10, rF = 10**10, bounds = None, max_dtot = None):
@@ -487,9 +500,7 @@ def open_setup(lenses, modes_df, setups_df, s0, lam0, r0=10**10):
       
        w, s, zpos = two_lens_out(d0, lens1, d1, lens2, d2, s0, lam0, r0=r0)
        r = radius(zpos, w, lam0)
-      
-      
-       plot_dual(d0, lens1, d1, lens2, d2, s0, lam0, r0=r0)
+       plt = plot_dual(d0, lens1, d1, lens2, d2, s0, lam0, r0=r0)
       
    else:
       
@@ -504,12 +515,75 @@ def open_setup(lenses, modes_df, setups_df, s0, lam0, r0=10**10):
        r = radius(zpos, w, lam0)
       
       
-       plot_single(d0, lens1, d1, s0, lam0, r0=r0)
+       plt = plot_single(d0, lens1, d1, s0, lam0, r0=r0)
   
   
    print(f"\n\nThe mode overlap for this setup is:  {mode}")
-   print(f"The spot size from this setup is: {round(s,4)} m")
-   print(f"The radius from this setup is: {round(r,4)} m")
+   print(f"The spot size from this setup is: {format_float(s,4)} m")
+   print(f"The radius from this setup is: {format_float(r,4)} m")
+  
+  
+  
+
+def st_open_setup(lenses, modes_df, setups_df, s0, lam0, r0=10**10):
+  
+   single = False
+  
+   if type(lenses) == tuple:
+       lens1 = lenses[0]
+       lens2 = lenses[1]
+      
+       st.write(f"You have chosen a dual lens setup with a {lens1} m lens first, followed by a {lens2} m lens")
+   else:
+       lens1 = lenses
+       lens2 = 'single'
+      
+       single = True
+      
+      
+       st.write(f"You have chosen the single lens setup using a {lens1} m lens")
+  
+  
+   mode = modes_df.loc[lens1,lens2]
+   setup = setups_df.loc[lens1, lens2]
+  
+  
+   if not single:
+      
+       d0, d1, d2 = setup
+      
+      
+       st.write(f"For this setup...")
+       st.write(f"the d0 distance: {d0} m")
+       st.write(f"the d1 distance: {d1} m")
+       st.write(f"the d2 distance: {d2} m")
+      
+      
+       w, s, zpos = two_lens_out(d0, lens1, d1, lens2, d2, s0, lam0, r0=r0)
+       r = radius(zpos, w, lam0)
+       plt = plot_dual(d0, lens1, d1, lens2, d2, s0, lam0, r0=r0)
+       st.pyplot(plt)
+      
+   else:
+      
+       d0, d1 = setup
+      
+       st.write(f"For this setup...")
+       st.write(f"the d0 distance: {d0} m")
+       st.write(f"the d1 distance: {d1} m")
+      
+      
+       w, s, zpos = one_lens_out(d0, lens1, d1, s0, lam0)
+       r = radius(zpos, w, lam0)
+      
+      
+       plt = plot_single(d0, lens1, d1, s0, lam0, r0=r0)
+       st.pyplot(plt)
+  
+  
+   st.write(f"\n\nThe mode overlap for this setup is:  {mode}")
+   st.write(f"The spot size from this setup is: {format_float(s,4)} m")
+   st.write(f"The radius from this setup is: {format_float(r,4)} m")
   
   
   
