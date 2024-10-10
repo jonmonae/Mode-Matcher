@@ -188,7 +188,7 @@ if st.session_state.opened == True:
     st.dataframe(modes)
 
     st.header("Setups:")
-    st.write("Formating - (d0,d1,d2)")
+    st.write("Formatting - (d0,d1,d2)")
     st.dataframe(setups)
 
 
