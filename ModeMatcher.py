@@ -120,6 +120,7 @@ max_dtot_str = st.text_input("Enter maximum dtot: ")
 # Save All button
 if st.button("Save All"):
     try:
+        st.session_state.opened=False
         st.session_state.s0 = float(s0_str) if s0_str else None
         st.session_state.r0 = float(r0_str) if r0_str else 10**10  # default to collimated if empty
         st.session_state.lam0 = float(lam0_str) if lam0_str else None
@@ -182,12 +183,16 @@ if st.session_state.opened == True:
 
 
 
-
-
-
+    st.header("Modes:")
+    st.write("Indexing - [lens1, lens2]")
     st.dataframe(modes)
+
+    st.header("Setups:")
+    st.write("Formating - (d0,d1,d2)")
     st.dataframe(setups)
-    st.write("Open Setup?")
+
+
+    st.header("Open Setup:")
     lens1_str = st.text_input("Lens 1:")
     lens2_str = st.text_input("Lens 2:")
 
