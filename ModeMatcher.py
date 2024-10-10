@@ -194,7 +194,7 @@ if st.session_state.opened == True:
 
     st.header("Open Setup:")
     lens1_str = st.text_input("Lens 1:")
-    lens2_str = st.text_input("Lens 2:")
+    lens2_str = st.text_input("Lens 2 (Leave blank for single lens setups):")
 
     if st.button('Open Setup'):
 
